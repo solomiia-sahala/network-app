@@ -1,0 +1,63 @@
+header {
+    --red: #f3576c;
+    --purple: #3e2e6a;
+    --blue: #130b52;
+    --bg: #fbe6d3;
+}
+
+.header-container {
+    display: flex;
+    background: var(--bg);
+    font-family: 'Oswald', sans-serif;
+    height: 75px;
+}
+
+.logo-img {
+    width: 125px;
+    height: 75px;
+}
+
+.wrapper {
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+.heading {
+    font-size: 25px;
+    top: 32px;
+    left: 410px;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-weight: 900;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.heading {
+    color: var(--bg);
+    text-transform: uppercase;
+    width: 100%;
+    text-align: center;
+    text-shadow: -1px -1px 0 var(--purple), 1px -1px 0 var(--purple), -1px 1px 0 var(--purple), 1px 1px 0 var(--purple);
+}
+
+.heading:after {
+    content: attr(data-heading);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    overflow: hidden;
+    color: var(--red);
+    transform: translate(0.1vw, 0.1vh);
+    mix-blend-mode: darken;
+    text-align: center;
+    width: 100%;
+    text-shadow: 1px 0px 0px var(--purple), 0px 1px 0px var(--blue), 2px 1px 0px var(--purple), 1px 2px 0px var(--blue), 3px 2px 0px var(--purple), 2px 3px 0px var(--blue), 4px 3px 0px var(--purple), 3px 4px 0px var(--blue), 5px 4px 0px var(--purple), 4px 5px 0px var(--blue), 6px 5px 0px var(--purple), 5px 6px 0px var(--blue), 7px 6px 0px var(--purple);
+}
