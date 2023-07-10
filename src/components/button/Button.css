@@ -1,0 +1,13 @@
+button {
+    padding: 10px;
+    background: cadetblue;
+    color: white;
+    border: 1px solid azure;
+    margin-top: 8px;
+}
+
+button:hover {
+    background: white;
+    border-color: cadetblue;
+    color: cadetblue;
+}

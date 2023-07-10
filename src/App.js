@@ -5,13 +5,16 @@ import { author_request_path, LIST_NAME_OPTIONS, request_path } from './communic
 import { ApiKey } from './communication/api-key.const';
 import BookItem from './components/bookItem/BookItem';
 import AuthorBook from './components/authorBook/AuthorBook';
+import Button from './components/button/Button';
 
 function App() {
   const [isLoading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
   const [authorBooks, setAuthorBooks] = useState([]);
+  const [activeBookTab, setActiveBookTab] = useState(LIST_NAME_OPTIONS.hardcoverFiction);
   const [hideBookItems, setHideBookItems] = useState(false);
   const getBooks = async (listName) => {
+    setActiveBookTab(listName);
     try {
       const response = await fetch(`${ request_path }?list=${ listName }&api-key=${ ApiKey }`);
       const json = await response.json();
@@ -41,20 +44,22 @@ function App() {
   useEffect(() => {
     getBooks(LIST_NAME_OPTIONS.hardcoverFiction);
   }, []);
-
   return (
     <div className="App">
       <Header/>
       <div className="button-container">
-        <button onClick={ getBooks.bind(this, LIST_NAME_OPTIONS.paperbackNonfiction) }>Click here to get Paperback
-          books
-        </button>
+        { activeBookTab === LIST_NAME_OPTIONS.hardcoverFiction ?
+          <Button label={ 'Click here to get Paperback books' } callback={ getBooks }
+                  callbackParam={ LIST_NAME_OPTIONS.paperbackNonfiction }/> :
+          <Button label={ 'Click here to get Hardcover books' } callback={ getBooks }
+                  callbackParam={ LIST_NAME_OPTIONS.hardcoverFiction }/> }
       </div>
       { hideBookItems && <div>
-        <button onClick={ setHideBookItems.bind(this, false) }>Back to all books</button>
+        <Button label={ 'Back to all books' } callback={ setHideBookItems } callbackParam={ false }/>
       </div> }
       <div className="main-container">
-        { hideBookItems ? authorBooks.map(book => <AuthorBook book={ book }/>) : books.map(book => <BookItem
+        { hideBookItems ? (!!authorBooks.length ? authorBooks?.map(book => <AuthorBook
+          book={ book }/>) : 'No books found') : books?.map(book => <BookItem
           book={ book } onAuthorBooks={ getBooksByAuthor }/>) }
       </div>
     </div>
